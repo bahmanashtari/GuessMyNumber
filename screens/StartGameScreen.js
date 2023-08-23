@@ -18,6 +18,8 @@ const StartGameScreen = () => {
 	)
 }
 
+export default StartGameScreen
+
 const styles = StyleSheet.create({
 	inputContainer: {
 		marginTop: 100,
@@ -43,5 +45,3 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 })
-
-export default StartGameScreen

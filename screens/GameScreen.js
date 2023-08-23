@@ -1,11 +1,18 @@
 import { View, Text, StyleSheet } from 'react-native'
 import PrimaryButton from '../components/PrimaryButton'
 
-const GameScreen = ({ onClose }) => {
+const GameScreen = () => {
 	return (
-		<View style={styles.gameScreenContainer}>
-			<Text>Game Screen!</Text>
-			<PrimaryButton onPress={onClose}>Close</PrimaryButton>
+		<View style={styles.screen}>
+			<Text>Opponent's Guess</Text>
+			<View>
+				<Text>Higher or Lower</Text>
+				<PrimaryButton>+</PrimaryButton>
+				<PrimaryButton>-</PrimaryButton>
+			</View>
+			<View>
+				<Text>Log Rounds</Text>
+			</View>
 		</View>
 	)
 }
@@ -13,9 +20,8 @@ const GameScreen = ({ onClose }) => {
 export default GameScreen
 
 const styles = StyleSheet.create({
-	gameScreenContainer: {
+	screen: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+		padding: 24,
 	},
 })

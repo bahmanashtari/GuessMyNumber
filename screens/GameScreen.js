@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Alert } from 'react-native'
 import PrimaryButton from '../components/ui/PrimaryButton'
 
 import Title from '../components/ui/Title'
@@ -15,26 +15,38 @@ const generateRandomBetween = (min, max, exclude) => {
 	}
 }
 
-const GameScreen = ({ pickedNumber }) => {
-	const initialGuess = generateRandomBetween(1, 100, pickedNumber)
+let minBoundary = 1
+let maxBoundary = 100
+
+const GameScreen = ({ userNumber }) => {
+	const initialGuess = generateRandomBetween(
+		minBoundary,
+		maxBoundary,
+		userNumber
+	)
 	const [currentGuess, setCurrentGuess] = useState(initialGuess)
 
-	const higherPressHandler = () => {
-		const newGuess = generateRandomBetween(
-			currentGuess,
-			100,
-			currentGuess - 1
-		)
-		setCurrentGuess(newGuess)
-	}
+	const nextGuessHandler = direction => {
+		if (
+			(direction === 'lower' && currentGuess < userNumber) ||
+			(direction === 'greater' && currentGuess > userNumber)
+		) {
+			Alert.alert("Do't lie!", [{ text: 'Sorry!', style: 'cancel' }])
+			return
+		}
 
-	const lowerPressHandler = () => {
-		const newGuess = generateRandomBetween(
-			1,
-			currentGuess,
-			currentGuess + 1
+		if (direction === 'lower') {
+			maxBoundary = currentGuess
+		} else {
+			minBoundary = currentGuess + 1
+		}
+
+		const newRndNumber = generateRandomBetween(
+			minBoundary,
+			maxBoundary,
+			currentGuess
 		)
-		setCurrentGuess(newGuess)
+		setCurrentGuess(newRndNumber)
 	}
 
 	let section = (
@@ -43,15 +55,21 @@ const GameScreen = ({ pickedNumber }) => {
 			<NumbersContainer>{currentGuess}</NumbersContainer>
 			<View>
 				<Text>Higher or Lower</Text>
-				<PrimaryButton onPress={higherPressHandler}>+</PrimaryButton>
-				<PrimaryButton onPress={lowerPressHandler}>-</PrimaryButton>
+				<View>
+					<PrimaryButton onPress={() => nextGuessHandler('greater')}>
+						+
+					</PrimaryButton>
+					<PrimaryButton onPress={() => nextGuessHandler('lower')}>
+						-
+					</PrimaryButton>
+				</View>
 			</View>
 		</>
 	)
-	if (currentGuess === pickedNumber) {
+	if (currentGuess === userNumber) {
 		section = (
 			<Text>
-				`You Won! Picked Number: ${pickedNumber} Current Guess: $
+				`You Won! Picked Number: ${userNumber} Current Guess: $
 				{currentGuess}`
 			</Text>
 		)

@@ -12,9 +12,13 @@ export default function App() {
 		setUserNumber(pickedNumber)
 	}
 
+	const gameScreenCloseHandler = () => {
+		setUserNumber(undefined)
+	}
+
 	let screen = <StartGameScreen onPickedNumber={pickedNumberHandler} />
 	if (userNumber) {
-		screen = <GameScreen />
+		screen = <GameScreen onClose={gameScreenCloseHandler} />
 	}
 
 	return (

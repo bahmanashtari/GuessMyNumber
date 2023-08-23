@@ -28,7 +28,7 @@ const StartGameScreen = ({ onPickedNumber }) => {
 			return
 		}
 
-		onPickedNumber()
+		onPickedNumber(enteredNumber)
 	}
 
 	return (

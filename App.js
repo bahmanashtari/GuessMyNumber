@@ -12,6 +12,10 @@ export default function App() {
 		setShowGameScreen(true)
 	}
 
+	const gameScreenCloseHandler = () => {
+		setShowGameScreen(false)
+	}
+
 	return (
 		<LinearGradient
 			colors={['#4e0329', '#ddb52f']}
@@ -24,7 +28,10 @@ export default function App() {
 				{!showGameScreen && (
 					<StartGameScreen onShowGameScreen={showGameScreenHandler} />
 				)}
-				{showGameScreen && <GameScreen />}
+				{showGameScreen && (
+					<GameScreen onClose={gameScreenCloseHandler} />
+				)}
+				{console.log(showGameScreen)}
 			</ImageBackground>
 		</LinearGradient>
 	)

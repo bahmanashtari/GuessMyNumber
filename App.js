@@ -6,14 +6,15 @@ import StartGameScreen from './screens/StartGameScreen'
 import GameScreen from './screens/GameScreen'
 
 export default function App() {
-	const [showGameScreen, setShowGameScreen] = useState(false)
+	const [userNumber, setUserNumber] = useState()
 
-	const showGameScreenHandler = () => {
-		setShowGameScreen(true)
+	const pickedNumberHandler = pickedNumber => {
+		setUserNumber(pickedNumber)
 	}
 
-	const gameScreenCloseHandler = () => {
-		setShowGameScreen(false)
+	let screen = <StartGameScreen onPickedNumber={pickedNumberHandler} />
+	if (userNumber) {
+		screen = <GameScreen />
 	}
 
 	return (
@@ -25,13 +26,7 @@ export default function App() {
 				resizeMode='cover'
 				style={styles.rootScreen}
 				imageStyle={styles.backgroundImage}>
-				{!showGameScreen && (
-					<StartGameScreen onShowGameScreen={showGameScreenHandler} />
-				)}
-				{showGameScreen && (
-					<GameScreen onClose={gameScreenCloseHandler} />
-				)}
-				{console.log(showGameScreen)}
+				{screen}
 			</ImageBackground>
 		</LinearGradient>
 	)

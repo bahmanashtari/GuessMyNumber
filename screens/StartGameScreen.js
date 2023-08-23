@@ -3,7 +3,7 @@ import { TextInput, View, Alert, StyleSheet } from 'react-native'
 
 import PrimaryButton from '../components/PrimaryButton'
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onShowGameScreen }) => {
 	const [enteredNumber, setEnteredNumber] = useState('')
 
 	const numberInputHandler = enteredText => {
@@ -28,7 +28,7 @@ const StartGameScreen = () => {
 			return
 		}
 
-		console.log('valid number')
+		onShowGameScreen()
 	}
 
 	return (

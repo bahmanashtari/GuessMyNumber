@@ -1,9 +1,17 @@
+import { useState } from 'react'
 import { StyleSheet, ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import StartGameScreen from './screens/StartGameScreen'
+import GameScreen from './screens/GameScreen'
 
 export default function App() {
+	const [showGameScreen, setShowGameScreen] = useState(false)
+
+	const showGameScreenHandler = () => {
+		setShowGameScreen(true)
+	}
+
 	return (
 		<LinearGradient
 			colors={['#4e0329', '#ddb52f']}
@@ -13,7 +21,10 @@ export default function App() {
 				resizeMode='cover'
 				style={styles.rootScreen}
 				imageStyle={styles.backgroundImage}>
-				<StartGameScreen />
+				{!showGameScreen && (
+					<StartGameScreen onShowGameScreen={showGameScreenHandler} />
+				)}
+				{showGameScreen && <GameScreen />}
 			</ImageBackground>
 		</LinearGradient>
 	)

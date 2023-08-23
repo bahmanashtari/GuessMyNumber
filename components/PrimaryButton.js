@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
 
-const PrimaryButton = () => {
+const PrimaryButton = ({ children }) => {
 	return (
 		<View>
-			<Text></Text>
+			<Text>{children}</Text>
 		</View>
 	)
 }

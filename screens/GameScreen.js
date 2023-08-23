@@ -19,15 +19,47 @@ const GameScreen = ({ pickedNumber }) => {
 	const initialGuess = generateRandomBetween(1, 100, pickedNumber)
 	const [currentGuess, setCurrentGuess] = useState(initialGuess)
 
-	return (
-		<View style={styles.screen}>
+	const higherPressHandler = () => {
+		const newGuess = generateRandomBetween(
+			currentGuess,
+			100,
+			currentGuess - 1
+		)
+		setCurrentGuess(newGuess)
+	}
+
+	const lowerPressHandler = () => {
+		const newGuess = generateRandomBetween(
+			1,
+			currentGuess,
+			currentGuess + 1
+		)
+		setCurrentGuess(newGuess)
+	}
+
+	let section = (
+		<>
 			<Title>Opponent's Guess</Title>
 			<NumbersContainer>{currentGuess}</NumbersContainer>
 			<View>
 				<Text>Higher or Lower</Text>
-				<PrimaryButton>+</PrimaryButton>
-				<PrimaryButton>-</PrimaryButton>
+				<PrimaryButton onPress={higherPressHandler}>+</PrimaryButton>
+				<PrimaryButton onPress={lowerPressHandler}>-</PrimaryButton>
 			</View>
+		</>
+	)
+	if (currentGuess === pickedNumber) {
+		section = (
+			<Text>
+				`You Won! Picked Number: ${pickedNumber} Current Guess: $
+				{currentGuess}`
+			</Text>
+		)
+	}
+
+	return (
+		<View style={styles.screen}>
+			{section}
 			<View>
 				<Text>Log Rounds</Text>
 			</View>

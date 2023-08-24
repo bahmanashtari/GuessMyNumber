@@ -1,11 +1,15 @@
-import { StyleSheet } from 'react-native-web'
+import { View, Image, StyleSheet } from 'react-native'
 
-import { View, Text } from 'react-native'
+import Title from '../components/ui/Title'
+import Colors from '../constants/colors'
 
 const GameOverScreen = ({ children }) => {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.message}>{children}</Text>
+		<View style={styles.rootContainer}>
+			<Title>Game Over!</Title>
+			<View style={styles.imageContainer}>
+				<Image style={styles.image} source={require('../assets/images/success.png')} />
+			</View>
 		</View>
 	)
 }
@@ -13,14 +17,23 @@ const GameOverScreen = ({ children }) => {
 export default GameOverScreen
 
 const styles = StyleSheet.create({
-	container: {
+	rootContainer: {
 		flex: 1,
-		alignItems: 'center',
+		padding: 24,
 		justifyContent: 'center',
+		alignItems: 'center',
 	},
-	message: {
-		fontSize: 42,
-		fontWeight: 'bold',
-		color: 'white',
+	imageContainer: {
+		width: 300,
+		height: 300,
+		borderRadius: 150,
+		borderWidth: 3,
+		borderColor: Colors.primary800,
+		overflow: 'hidden',
+		margin: 36,
+	},
+	image: {
+		width: '100%',
+		height: '100%',
 	},
 })

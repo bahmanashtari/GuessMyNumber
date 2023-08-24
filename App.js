@@ -23,12 +23,6 @@ export default function App() {
 		return <AppLoading />
 	}
 
-	const startNewGameHandler = () => {
-		setUserNumber(undefined)
-		setGameIsOver(true)
-		setGuessCount(0)
-	}
-
 	const pickedNumberHandler = pickedNumber => {
 		setUserNumber(pickedNumber)
 		setGameIsOver(false)
@@ -37,6 +31,11 @@ export default function App() {
 	const gameOverHandler = guessCount => {
 		setGuessCount(guessCount)
 		setGameIsOver(true)
+	}
+
+	const startNewGameHandler = () => {
+		setUserNumber(null)
+		setGuessCount(0)
 	}
 
 	let screen = <StartGameScreen onPickedNumber={pickedNumberHandler} />
@@ -48,7 +47,7 @@ export default function App() {
 			<GameOverScreen
 				guessCount={guessCount}
 				userNumber={userNumber}
-				startNewGame={startNewGameHandler}
+				onStartNewGame={startNewGameHandler}
 			>
 				Game is Over!
 			</GameOverScreen>

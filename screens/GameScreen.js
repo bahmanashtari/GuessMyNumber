@@ -27,6 +27,11 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 	const [guessCount, setGuessCount] = useState(0)
 
 	useEffect(() => {
+		minBoundary = 1
+		maxBoundary = 100
+	}, [])
+
+	useEffect(() => {
 		if (currentGuess === userNumber) {
 			onGameOver(guessCount)
 		}

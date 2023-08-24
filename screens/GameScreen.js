@@ -24,10 +24,11 @@ let maxBoundary = 100
 const GameScreen = ({ userNumber, onGameOver }) => {
 	const initialGuess = generateRandomBetween(1, 100, userNumber)
 	const [currentGuess, setCurrentGuess] = useState(initialGuess)
+	const [guessCount, setGuessCount] = useState(0)
 
 	useEffect(() => {
 		if (currentGuess === userNumber) {
-			onGameOver()
+			onGameOver(guessCount)
 		}
 	}, [currentGuess, userNumber, onGameOver])
 
@@ -49,6 +50,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 		}
 
 		const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess)
+		setGuessCount(currGuessCount => currGuessCount + 1)
 		setCurrentGuess(newRndNumber)
 	}
 

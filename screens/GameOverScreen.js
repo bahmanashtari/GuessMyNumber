@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native-web'
 
 import { View, Text } from 'react-native'
 
-const GameOverScreen = () => {
+const GameOverScreen = ({ children }) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.message}>Game is Over!</Text>
+			<Text style={styles.message}>{children}</Text>
 		</View>
 	)
 }

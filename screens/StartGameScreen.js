@@ -45,14 +45,10 @@ const StartGameScreen = ({ onPickedNumber }) => {
 			/>
 			<View style={styles.buttonsContainer}>
 				<View style={styles.buttonContainer}>
-					<PrimaryButton onPress={resetInputHandler}>
-						Reset
-					</PrimaryButton>
+					<PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
 				</View>
 				<View style={styles.buttonContainer}>
-					<PrimaryButton onPress={confirmInputHandler}>
-						Confirm
-					</PrimaryButton>
+					<PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
 				</View>
 			</View>
 		</View>

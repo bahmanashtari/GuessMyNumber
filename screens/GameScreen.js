@@ -19,11 +19,7 @@ let minBoundary = 1
 let maxBoundary = 100
 
 const GameScreen = ({ userNumber }) => {
-	const initialGuess = generateRandomBetween(
-		minBoundary,
-		maxBoundary,
-		userNumber
-	)
+	const initialGuess = generateRandomBetween(minBoundary, maxBoundary, userNumber)
 	const [currentGuess, setCurrentGuess] = useState(initialGuess)
 
 	const nextGuessHandler = direction => {
@@ -31,7 +27,9 @@ const GameScreen = ({ userNumber }) => {
 			(direction === 'lower' && currentGuess < userNumber) ||
 			(direction === 'greater' && currentGuess > userNumber)
 		) {
-			Alert.alert("Do't lie!", [{ text: 'Sorry!', style: 'cancel' }])
+			Alert.alert("Do't lie!", 'You know that this is wrong...', [
+				{ text: 'Sorry!', style: 'cancel' },
+			])
 			return
 		}
 
@@ -41,11 +39,7 @@ const GameScreen = ({ userNumber }) => {
 			minBoundary = currentGuess + 1
 		}
 
-		const newRndNumber = generateRandomBetween(
-			minBoundary,
-			maxBoundary,
-			currentGuess
-		)
+		const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess)
 		setCurrentGuess(newRndNumber)
 	}
 
@@ -56,12 +50,8 @@ const GameScreen = ({ userNumber }) => {
 			<View>
 				<Text>Higher or Lower</Text>
 				<View>
-					<PrimaryButton onPress={() => nextGuessHandler('greater')}>
-						+
-					</PrimaryButton>
-					<PrimaryButton onPress={() => nextGuessHandler('lower')}>
-						-
-					</PrimaryButton>
+					<PrimaryButton onPress={() => nextGuessHandler('greater')}>+</PrimaryButton>
+					<PrimaryButton onPress={() => nextGuessHandler('lower')}>-</PrimaryButton>
 				</View>
 			</View>
 		</>
@@ -69,8 +59,7 @@ const GameScreen = ({ userNumber }) => {
 	if (currentGuess === userNumber) {
 		section = (
 			<Text>
-				`You Won! Picked Number: ${userNumber} Current Guess: $
-				{currentGuess}`
+				`You Won! Picked Number: ${userNumber} Current Guess: ${currentGuess}`
 			</Text>
 		)
 	}

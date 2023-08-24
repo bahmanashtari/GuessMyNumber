@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native'
 import PrimaryButton from '../components/ui/PrimaryButton'
 
@@ -18,9 +18,15 @@ const generateRandomBetween = (min, max, exclude) => {
 let minBoundary = 1
 let maxBoundary = 100
 
-const GameScreen = ({ userNumber }) => {
+const GameScreen = ({ userNumber, onGameOver }) => {
 	const initialGuess = generateRandomBetween(minBoundary, maxBoundary, userNumber)
 	const [currentGuess, setCurrentGuess] = useState(initialGuess)
+
+	useEffect(() => {
+		if (currentGuess === userNumber) {
+			onGameOver()
+		}
+	}, [currentGuess, userNumber])
 
 	const nextGuessHandler = direction => {
 		if (
@@ -43,8 +49,8 @@ const GameScreen = ({ userNumber }) => {
 		setCurrentGuess(newRndNumber)
 	}
 
-	let section = (
-		<>
+	return (
+		<View style={styles.screen}>
 			<Title>Opponent's Guess</Title>
 			<NumbersContainer>{currentGuess}</NumbersContainer>
 			<View>
@@ -54,19 +60,6 @@ const GameScreen = ({ userNumber }) => {
 					<PrimaryButton onPress={() => nextGuessHandler('lower')}>-</PrimaryButton>
 				</View>
 			</View>
-		</>
-	)
-	if (currentGuess === userNumber) {
-		section = (
-			<Text>
-				`You Won! Picked Number: ${userNumber} Current Guess: ${currentGuess}`
-			</Text>
-		)
-	}
-
-	return (
-		<View style={styles.screen}>
-			{section}
 			<View>
 				<Text>Log Rounds</Text>
 			</View>

@@ -79,13 +79,11 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 					</View>
 				</View>
 			</Card>
-			<Card>
-				<FlatList
-					data={guessRounds}
-					renderItem={({ item }) => <GuessLog>{item}</GuessLog>}
-					keyExtractor={item => item}
-				/>
-			</Card>
+			<FlatList
+				data={guessRounds}
+				renderItem={({ item }) => <GuessLog>{item}</GuessLog>}
+				keyExtractor={item => item}
+			/>
 		</View>
 	)
 }

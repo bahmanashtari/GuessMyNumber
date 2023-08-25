@@ -33,7 +33,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 
 	useEffect(() => {
 		if (currentGuess === userNumber) {
-			onGameOver()
+			onGameOver(guessRounds.length)
 		}
 	}, [currentGuess, userNumber, onGameOver])
 
@@ -55,8 +55,8 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 		}
 
 		const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess)
-		setGuessRounds(currentGuessRounds => [...currentGuessRounds, newRndNumber])
 		setCurrentGuess(newRndNumber)
+		setGuessRounds(currentGuessRounds => [newRndNumber, ...currentGuessRounds])
 	}
 
 	return (
@@ -78,7 +78,14 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 					</View>
 				</View>
 			</Card>
-			<FlatList data={guessRounds} renderItem={({ item }) => <Text>{item}</Text>} />
+			<Card>
+				<FlatList
+					data={guessRounds}
+					renderItem={({ item }) => (
+						<Text style={{ color: 'white', fontSize: '22' }}>{item}</Text>
+					)}
+				/>
+			</Card>
 		</View>
 	)
 }

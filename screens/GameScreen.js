@@ -84,6 +84,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 					renderItem={({ item }) => (
 						<Text style={{ color: 'white', fontSize: '22' }}>{item}</Text>
 					)}
+					keyExtractor={item => item}
 				/>
 			</Card>
 		</View>

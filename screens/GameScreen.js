@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { View, StyleSheet, Alert } from 'react-native'
+import { Text, View, FlatList, StyleSheet, Alert } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import PrimaryButton from '../components/ui/PrimaryButton'
@@ -24,7 +24,7 @@ let maxBoundary = 100
 const GameScreen = ({ userNumber, onGameOver }) => {
 	const initialGuess = generateRandomBetween(1, 100, userNumber)
 	const [currentGuess, setCurrentGuess] = useState(initialGuess)
-	const [guessCount, setGuessCount] = useState(0)
+	const [guessRounds, setGuessRounds] = useState([initialGuess])
 
 	useEffect(() => {
 		minBoundary = 1
@@ -33,7 +33,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 
 	useEffect(() => {
 		if (currentGuess === userNumber) {
-			onGameOver(guessCount)
+			onGameOver()
 		}
 	}, [currentGuess, userNumber, onGameOver])
 
@@ -55,7 +55,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 		}
 
 		const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess)
-		setGuessCount(currGuessCount => currGuessCount + 1)
+		setGuessRounds(currentGuessRounds => [...currentGuessRounds, newRndNumber])
 		setCurrentGuess(newRndNumber)
 	}
 
@@ -78,6 +78,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
 					</View>
 				</View>
 			</Card>
+			<FlatList data={guessRounds} renderItem={({ item }) => <Text>{item}</Text>} />
 		</View>
 	)
 }

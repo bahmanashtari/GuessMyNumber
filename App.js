@@ -28,8 +28,7 @@ export default function App() {
 		setGameIsOver(false)
 	}
 
-	const gameOverHandler = guessCount => {
-		setGuessCount(guessCount)
+	const gameOverHandler = () => {
 		setGameIsOver(true)
 	}
 

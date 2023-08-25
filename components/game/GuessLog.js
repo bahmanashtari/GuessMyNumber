@@ -1,24 +1,12 @@
-import { useState, useEffect } from 'react'
-
 import { Text, View, StyleSheet } from 'react-native'
 
 import Colors from '../../constants/colors'
 
-const GuessLog = ({ children }) => {
-	const [roundNumber, setRoundNumber] = useState(0)
-
-	useEffect(() => {
-		setRoundNumber(curr => curr + 1)
-	}, [])
-
+const GuessLog = ({ roundNumber, guess }) => {
 	return (
-		<View style={styles.mainContainer}>
-			<View style={styles.subContainer}>
-				<Text style={styles.roundNumber}>{roundNumber}</Text>
-			</View>
-			<View style={styles.subContainer}>
-				<Text style={styles.guess}>{children}</Text>
-			</View>
+		<View style={styles.listItem}>
+			<Text style={styles.itemText}>#{roundNumber}</Text>
+			<Text style={styles.itemText}>{guess}</Text>
 		</View>
 	)
 }
@@ -26,18 +14,23 @@ const GuessLog = ({ children }) => {
 export default GuessLog
 
 const styles = StyleSheet.create({
-	mainContainer: {
+	listItem: {
+		borderColor: Colors.primary800,
+		borderWidth: 1,
+		borderRadius: 40,
+		padding: 12,
+		marginVertical: 8,
+		backgroundColor: Colors.accent500,
 		flexDirection: 'row',
+		justifyContent: 'space-between',
+		width: '100%',
+		elevation: 4,
+		shadowColor: 'black',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0.25,
+		shadowRadius: 3,
 	},
-	subContainer: {
-		flex: 1,
-	},
-	guess: {
-		fontSize: 18,
-		color: Colors.accent500,
-	},
-	roundNumber: {
-		fontSize: 16,
-		color: 'white',
+	itemText: {
+		fontFamily: 'open-sans',
 	},
 })
